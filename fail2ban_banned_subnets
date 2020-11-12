@@ -1,0 +1,13 @@
+#!/bin/env bash
+
+QUERY=$(cat <<'SQL'
+select jail, rtrim(ip, replace(ip, '.', '')) as 'cidrp', count(ip) as 'tickets'
+from bans
+where datetime(timeofban + bantime, 'unixepoch', 'localtime') > datetime('now', 'localtime')
+group by jail, cidrp
+having tickets >= 5
+order by tickets desc, jail
+SQL
+)
+
+sqlite3 'file:/var/lib/fail2ban/fail2ban.sqlite3?mode=ro' "$QUERY"

@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+# ban_single - ban one IP address : "ban_single 1.2.3.4"
+# https://github.com/TonyGravagno/ban-the-bad
+# (C) 2020 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+CHAIN=single
+. ban_common
+
+ban_this $IP

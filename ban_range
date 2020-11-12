@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+# ban_range - ban a range of IPs : "ban_range 1.2.3.x-1.2.3.y"
+# https://github.com/TonyGravagno/ban-the-bad
+# (C) 2020 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+CHAIN=range
+. ban_common
+
+ban_this $IP

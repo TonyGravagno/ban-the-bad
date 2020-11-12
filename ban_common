@@ -1,0 +1,75 @@
+#!/bin/env bash
+
+# ban_common - features common to all ban scripts
+# https://github.com/TonyGravagno/ban-the-bad
+# (C) 2020 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+# Thanks : https://blog.sleeplessbeastie.eu/2018/06/21/how-to-create-iptables-firewall-using-custom-chains/
+
+LOGPATH=/home/ubuntu/scripts/security
+LOGSCRIPT=${LOGPATH}/ban_all_${CHAIN}
+
+chain_exists() {
+    RESULT=1
+    iptables -n --list $CHAIN >/dev/null 2>&1 && RESULT=0
+    #    echo "chain exists result $RESULT"
+    return $RESULT
+}
+
+ban_exists() {
+    RESULT=1
+    iptables -L $CHAIN | grep $1 >/dev/null 2>&1 && RESULT=0
+    #    echo "ban exists result $RESULT"
+    return $RESULT
+}
+
+delete_chain() {
+    iptables -D INPUT -j $CHAIN
+    iptables -F $CHAIN
+    iptables -X $CHAIN
+}
+
+verify_chain() {
+    chain_exists $CHAIN && return
+    if [[ ! -f $LOGSCRIPT ]]; then
+        cat >>$LOGSCRIPT <<SCRIPT
+#!/bin/env bash
+
+###############
+
+SCRIPT
+
+        chmod 700 $LOGSCRIPT
+
+    fi
+
+    iptables -N $CHAIN
+    iptables -A $CHAIN -j RETURN
+    iptables -I INPUT -j $CHAIN
+}
+
+ban_this() {
+    RANGE=$1
+    //echo ">$RANGE<"
+
+    OPT="-s"
+    if [[ $1 =~ .*-.* ]]; then OPT="--src-range"; fi
+
+    echo "iptables -I $CHAIN $OPT $1 -j REJECT"
+
+    ban_exists $1 || iptables -I $CHAIN $OPT $1 -j REJECT
+
+    CMD="./ban_$CHAIN $IP"
+    grep "$CMD" $LOGSCRIPT >/dev/null 2>&1 || echo $CMD >>$LOGSCRIPT
+
+    iptables --line-numbers -vnL $CHAIN
+}
+
+if [[ $1 == "d" ]]; then
+    delete_chain
+    echo "$CHAIN deleted"
+    exit
+fi
+
+IP=$1
+verify_chain

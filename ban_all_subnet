@@ -1,0 +1,6 @@
+#!/bin/env bash
+
+###############
+
+./ban_subnet 45.142.120
+./ban_subnet 193.169.253
