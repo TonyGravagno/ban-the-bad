@@ -45,6 +45,6 @@ I also understand that IP addresses can be spoofed. I try, and recommend, to onl
 
 # License
 
-This code is published under the MIT License - you are free to do whatever you wish with it. 
+This code is published under the MIT License - you are free to do whatever you wish with it.
 
 Comments and enhancements are certainly welcome. Please create a ticket to discuss changes before submitting a PR. I'd like to keep these scripts very small and merging in too much functionality might conflict with that current intent.
