@@ -2,7 +2,9 @@
 
 # ban_common - features common to all ban scripts
 # https://github.com/TonyGravagno/ban-the-bad
-# (C) 2020 Tony Gravagno : MIT Licenced : Irony acknowledged
+# (C) 2022 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+###############
 
 # Thanks : https://blog.sleeplessbeastie.eu/2018/06/21/how-to-create-iptables-firewall-using-custom-chains/
 

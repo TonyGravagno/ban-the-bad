@@ -1,5 +1,11 @@
 #!/bin/env bash
 
+# ban_common - features common to all ban scripts
+# https://github.com/TonyGravagno/ban-the-bad
+# (C) 2022 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+###############
+
 QUERY=$(cat <<'SQL'
 select jail, rtrim(ip, replace(ip, '.', '')) as 'cidrp', count(ip) as 'tickets'
 from bans

@@ -1,5 +1,9 @@
 #!/bin/env bash
 
+# ban_common - features common to all ban scripts
+# https://github.com/TonyGravagno/ban-the-bad
+# (C) 2022 Tony Gravagno : MIT Licenced : Irony acknowledged
+
 ###############
 
 ./ban_single 212.70.149.37

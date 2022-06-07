@@ -1,8 +1,12 @@
 #!/bin/env bash
 
-# ban_single - ban one IP address : "ban_single 1.2.3.4"
+# ban_common - features common to all ban scripts
 # https://github.com/TonyGravagno/ban-the-bad
-# (C) 2020 Tony Gravagno : MIT Licenced : Irony acknowledged
+# (C) 2022 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+###############
+
+# ban_single - ban one IP address : "ban_single 1.2.3.4"
 
 CHAIN=single
 . ban_common

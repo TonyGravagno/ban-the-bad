@@ -1,8 +1,12 @@
 #!/bin/env bash
 
-# ban_subnet - ban a class D IP block, 0-255 : "ban_subnet 1.2.3"
+# ban_common - features common to all ban scripts
 # https://github.com/TonyGravagno/ban-the-bad
-# (C) 2020 Tony Gravagno : MIT Licenced : Irony acknowledged
+# (C) 2022 Tony Gravagno : MIT Licenced : Irony acknowledged
+
+###############
+
+# ban_subnet - ban a class D IP block, 0-255 : "ban_subnet 1.2.3"
 
 CHAIN=subnet
 . ban_common
