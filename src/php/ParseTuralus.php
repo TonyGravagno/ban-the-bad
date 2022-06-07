@@ -1,18 +1,29 @@
 <?php
 
-class ParseTuralus
-{
-    const RELATIVE = '../../text/';
+namespace BanTheBad;
 
-    public function doParse()
+require_once __DIR__ . "\BaseListProcessor.php";
+
+use BanTheBad\BaseListProcessor;
+
+class ParseTuralus extends BaseListProcessor
+{
+    function __construct()
     {
-        $path = self::RELATIVE . 'turalus_encycloDB_master_Dirty_Words_DirtyWords.csv';
+        $this->writePath = ''; // not used like it is in other modules
+        $this->init();
+    }
+
+    public function process()
+    {
+        $this->write('turalus_encycloDB_master_Dirty_Words_DirtyWords.csv');
+    }
+
+    public function write($path)
+    {
+        $path = self::RELATIVE . $path;
         $dataArray = $this->getFile($path);
         $isFirst = true;
-
-        set_error_handler(function ($err_severity, $err_msg, $err_file, $err_line, array $err_context) {
-            throw new ErrorException($err_msg, 0, $err_severity, $err_file, $err_line);
-        }, E_WARNING);
 
         $languages = [];
         foreach ($dataArray as $line) {
@@ -31,34 +42,14 @@ class ParseTuralus
                 die("failed to explode $line");
             }
             $word = $this->cleanLine($word, false);
-            try {
-                $writePath = self::RELATIVE . "turalus/turalus_$language.txt";
-                if (!in_array($language, $languages)) {
-                    if (file_exists($writePath))
-                        unlink($writePath);
-                    $languages[] = $language;
-                }
-                $prefix = file_exists($writePath) ? PHP_EOL : '';
-                $result = file_put_contents($writePath, $prefix . $word,  FILE_APPEND);
-                if (false === $result)
-                    die("error with $writePath and $word, $line");
-            } catch (\Throwable $th) {
-                // warning is now a throwable ErrorException, handle if desired
-                die("error with $writePath and $word, $line");
+            $this->writePath = self::RELATIVE . "turalus/turalus_$language.txt";
+            if (!in_array($language, $languages)) {
+                if (file_exists($this->writePath))
+                    unlink($this->writePath);
+                $languages[] = $language;
             }
+            $this->saveFile($word, "error with $this->writePath and $word, $line");
         }
-    }
-    private function getFile($path)
-    {
-        $array = [];
-        try {
-            $array = file($path, FILE_SKIP_EMPTY_LINES);
-        } catch (\Throwable $th) {
-            die('failed to read file');
-        }
-        if (empty($array))
-            die('file is empty');
-        return $array;
     }
 
     function cleanLine($line, $start = true)
@@ -83,4 +74,4 @@ class ParseTuralus
     }
 }
 
-(new ParseTuralus())->doParse();
+(new ParseTuralus())->process();
