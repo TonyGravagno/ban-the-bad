@@ -31,7 +31,7 @@ broekhoesten
 brugpieperg
 buffelen
 buiten de pot piesen
-da's kloten van de bok
+das kloten van de bok
 de ballen
 de hoer spelen
 de hond uitlaten
@@ -110,8 +110,8 @@ opgeilen
 opkankeren
 oprotten
 opsodemieteren
-op z'n hondjes
-op z'n sodemieter geven
+op zn hondjes
+op zn sodemieter geven
 opzouten
 ouwehoer
 ouwehoeren
@@ -134,7 +134,6 @@ publiciteitsgeil
 raaskallen
 reet
 reetridder
-"reet trappen, voor zijn"
 remsporeng
 reutelen
 rothoer
