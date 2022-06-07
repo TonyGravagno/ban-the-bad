@@ -7,3 +7,4 @@
 - https://gist.github.com/jamiew/1112488
 - https://github.com/MauriceButler/badwords
 - https://github.com/turalus/encycloDB/blob/master/Dirty%20Words/DirtyWords.csv
+- https://perishablepress.com/wordpress-spam-battle-3-seconds-that-will-save-you-hours-of-time/
